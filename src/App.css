@@ -1,0 +1,33 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--text-400);
+}
+
+.note-app {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.note-form {
+  gap: 1.5rem;
+  display: grid;
+}
+
+.add-new-note {
+  width: 30%;
+}
+
+.note-container {
+  width: 60%;
+}
