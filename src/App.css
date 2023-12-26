@@ -9,8 +9,14 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid var(--text-400);
+}
+
+.note-header p {
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .note-app {
@@ -63,6 +69,7 @@
   border-bottom: 1px solid var(--text-100);
 }
 
+
 .note-item.completed .title {
   text-decoration: line-through;
 }
@@ -99,4 +106,22 @@
 
 .note-item__footer {
   color: var(--text-300);
+}
+
+@media screen and (max-width: 600px) {
+  .note-app, .note-item__header .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .note-header p {
+    font-size: 1.2rem;
+  }  
+
+  .add-new-note {
+    width: 60%;
+  }
+
+  .note-status{
+    margin-top: 1.5rem;
+  }
 }
