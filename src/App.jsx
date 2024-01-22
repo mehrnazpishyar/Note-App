@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import "./App.css";
 import AddNewNote from "./components/AddNewNote";
 import NoteList from "./components/NoteList";
@@ -25,30 +25,32 @@ function notesReducer(state, action) {
   }
 }
 
+
+const LOCAL_STORAGE_KEY = "notes";
+
 function App() {
-  // const [notes, setNotes] = useState([]);
-  const [notes, dispatch] = useReducer(notesReducer, []);
+  const [notes, dispatch] = useReducer(notesReducer, [], (initial) => {
+    const storedNotes = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return storedNotes ? JSON.parse(storedNotes) : initial;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
+  }, [notes]);
+
 
   const [sortBy, setSortBy] = useState("latest");
 
   const handleAddNote = (newNote) => {
-    // setNotes((prevNotes) => [...prevNotes, newNote]);
     dispatch({ type: "add", payload: newNote });
   };
 
   const handleDeleteNote = (id) => {
-    // setNotes((prevNotes) => prevNotes.filter((n) => n.id !== id));
     dispatch({ type: "delete", payload: id });
   };
 
   const handleCompleteNote = (e) => {
     const noteId = Number(e.target.value);
-
-    // setNotes((prevNotes) =>
-    //   prevNotes.map((note) =>
-    //     note.id === noteId ? { ...note, completed: !note.completed } : note
-    //   )
-    // );
     dispatch({ type: "complete", payload: noteId });
   };
 
